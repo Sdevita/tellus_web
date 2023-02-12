@@ -1,6 +1,7 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:tellus_web/privacy_page.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 void main() {
@@ -58,6 +59,22 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const PrivacyPage();
+                  }));
+                },
+                child: const Text(
+                  "Privacy policies",
+                  style: TextStyle(color: Colors.white),
+                )),
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Row(
