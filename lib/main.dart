@@ -1,8 +1,10 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:tellus_web/RouteNames.dart';
 import 'package:tellus_web/privacy_page.dart';
 import 'package:url_strategy/url_strategy.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -19,9 +21,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tellus',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
           useMaterial3: true, primaryColor: brandColor, fontFamily: 'Euclid'),
-      home: const MyHomePage(title: 'tellus'),
+      initialRoute: RoutesName.homePageRoute,
+      routes: {
+        RoutesName.homePageRoute : (context) => const MyHomePage(title: "tellus"),
+        RoutesName.privacyPageRoute: (context) => const PrivacyPage()
+      },
     );
   }
 }
@@ -64,10 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.all(16.0),
             child: GestureDetector(
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return const PrivacyPage();
-                  }));
+                  Navigator.of(context).pushNamed(RoutesName.privacyPageRoute);
                 },
                 child: const Text(
                   "Privacy policies",
